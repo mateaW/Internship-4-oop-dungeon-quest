@@ -1,0 +1,5 @@
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.csproj.AssemblyReference.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.AssemblyInfoInputs.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.AssemblyInfo.cs
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.csproj.CoreCompileInputs.cache
