@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dungeon_Crawler.Data\Dungeon_Crawler.Data.csproj" />
+  </ItemGroup>
+
 </Project>

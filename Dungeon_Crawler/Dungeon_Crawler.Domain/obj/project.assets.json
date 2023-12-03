@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Dungeon_Crawler.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dungeon_Crawler.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dungeon_Crawler.Data.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Dungeon_Crawler.Data/1.0.0": {
+      "type": "project",
+      "path": "../Dungeon_Crawler.Data/Dungeon_Crawler.Data.csproj",
+      "msbuildProject": "../Dungeon_Crawler.Data/Dungeon_Crawler.Data.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Dungeon_Crawler.Data >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\matea\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\matea\\Documents\\DUMP_internship\\Internship-4-oop-dungeon-quest\\Dungeon_Crawler\\Dungeon_Crawler.Data\\Dungeon_Crawler.Data.csproj": {
+              "projectPath": "C:\\Users\\matea\\Documents\\DUMP_internship\\Internship-4-oop-dungeon-quest\\Dungeon_Crawler\\Dungeon_Crawler.Data\\Dungeon_Crawler.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dungeon_Crawler.Domain\Dungeon_Crawler.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
