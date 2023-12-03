@@ -3,3 +3,13 @@ C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_
 C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.AssemblyInfoInputs.cache
 C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.AssemblyInfo.cs
 C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.csproj.CoreCompileInputs.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\bin\Debug\net6.0\Dungeon_Crawler.Domain.deps.json
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\bin\Debug\net6.0\Dungeon_Crawler.Domain.dll
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\bin\Debug\net6.0\Dungeon_Crawler.Domain.pdb
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\bin\Debug\net6.0\Dungeon_Crawler.Data.dll
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\bin\Debug\net6.0\Dungeon_Crawler.Data.pdb
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.csproj.CopyComplete
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.dll
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\refint\Dungeon_Crawler.Domain.dll
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\Dungeon_Crawler.Domain.pdb
+C:\Users\matea\Documents\DUMP_internship\Internship-4-oop-dungeon-quest\Dungeon_Crawler\Dungeon_Crawler.Domain\obj\Debug\net6.0\ref\Dungeon_Crawler.Domain.dll

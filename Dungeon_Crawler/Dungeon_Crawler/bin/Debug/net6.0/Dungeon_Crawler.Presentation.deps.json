@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Dungeon_Crawler.Presentation/1.0.0": {
+        "dependencies": {
+          "Dungeon_Crawler.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Dungeon_Crawler.Presentation.dll": {}
+        }
+      },
+      "Dungeon_Crawler.Data/1.0.0": {
+        "runtime": {
+          "Dungeon_Crawler.Data.dll": {}
+        }
+      },
+      "Dungeon_Crawler.Domain/1.0.0": {
+        "dependencies": {
+          "Dungeon_Crawler.Data": "1.0.0"
+        },
+        "runtime": {
+          "Dungeon_Crawler.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dungeon_Crawler.Presentation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dungeon_Crawler.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dungeon_Crawler.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
