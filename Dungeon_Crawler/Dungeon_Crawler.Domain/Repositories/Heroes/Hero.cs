@@ -25,7 +25,11 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             HPMax = HP;
             Level = 1;
         }
-
+        public void HeroAttack(Monster monster)
+        {
+            monster.HP -= Damage;
+            GetExperience(monster.XP);
+        }
         public void GetExperience(int xpGained)
         {
             XP += xpGained;
@@ -48,11 +52,6 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             Console.WriteLine($"HP: {HP} / {HPMax}\n" +
                 $"XP: {XP} / {XPMax}\n" +
                 $"DAMAGE: {Damage}");
-        }
-
-        public virtual void AttackMonster(Monster monster)
-        {
-
         }
 
         public virtual void PrintHeroInfo()

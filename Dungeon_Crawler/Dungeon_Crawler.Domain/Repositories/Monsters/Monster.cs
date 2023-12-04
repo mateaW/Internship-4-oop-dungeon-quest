@@ -1,34 +1,39 @@
 ﻿using Dungeon_Crawler.Domain.Repositories.Heroes;
 using Dungeon_Crawler.Data.Enums;
-using System.Security.AccessControl;
+
 
 namespace Dungeon_Crawler.Domain.Repositories.Monsters
 {
-    public abstract class Monster
+    public class Monster
     {
         public string Type { get; set; }
         public int HP { get; set; }
-        public int HPMax { get; set; }
         public int Damage { get; set; }
         public int XP { get; set; }
         public Monster()
         {
             Type = "";
-        }
-        public void Attack(Hero hero)
-        {
+            // different values for HP,XP,Damage for every monster
         }
 
-        public void PrintMonsterInfo()
+        public virtual void Attack(Hero hero)
         {
-            Console.WriteLine($"HERO: {Type}\n" +
+            // there will be different logic for attack for every monster
+        }
+
+        public virtual void PrintMonsterInfo()
+        {
+            Console.WriteLine($"MONSTER: {Type}\n" +
                 $"HP: {HP} \n" +
                 $"XP: {XP} \n" +
                 $"DAMAGE: {Damage} \n");
         }
 
+        
         public List<MonsterType> MonsterGenerator(int numberOfMonsters)
         {
+            // generates how much we want monsters and puts them in a list
+
             List<MonsterType> monsters = new List<MonsterType>();
             Random random = new();
 

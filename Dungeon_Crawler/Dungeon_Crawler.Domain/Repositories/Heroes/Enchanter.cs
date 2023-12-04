@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Data.Enums;
+using Dungeon_Crawler.Domain.Repositories.Monsters;
 
 namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
@@ -21,19 +22,20 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             CanRevive = true; // he can only revive once
         }
 
-        public void UseManaForAttack()
+        public void EnchanterAttack(Monster monster)
         {
             if (Mana > 0)
             {
-                Console.WriteLine($"{Name} koristi magičnu moć za napad.");
+                monster.HP -= Damage;
+                GetExperience(monster.XP);
                 Mana--;
             }
             else
             {
-                Console.WriteLine($"{Name} nema dovoljno mane za napad. Mana će se obnoviti.");
                 RenewMana();
             }
         }
+
         public void ExchangeManaForHP(int manaToExchange)
         {
             if (Mana >= manaToExchange)

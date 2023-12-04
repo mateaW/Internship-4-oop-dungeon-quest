@@ -1,8 +1,10 @@
-﻿namespace Dungeon_Crawler.Domain.Repositories.Monsters
+﻿using Dungeon_Crawler.Domain.Repositories.Heroes;
+
+namespace Dungeon_Crawler.Domain.Repositories.Monsters
 {
     public class Witch : Monster
     {
-        public Witch()
+        public Witch() : base()
         {
             Random random = new();
             this.Type = "Witch";
@@ -20,14 +22,24 @@
         {
             Random random = new();
             double curseProbability = random.NextDouble();
-            if(curseProbability >= 50)
+            if(curseProbability >= 0.5)
             {
                 return true;
-                // everyone loses health
             }
             else
             {
                 return false;
+            }
+        }
+
+        public override void Attack(Hero hero)
+        {
+            base.Attack(hero);
+            if (CurseProbability())
+            {
+                Random random = new();
+                hero.HP = random.Next(1, 6);
+                // add that health also changes to monsters
             }
         }
 

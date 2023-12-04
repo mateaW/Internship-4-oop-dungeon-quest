@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Data.Enums;
+using Dungeon_Crawler.Domain.Repositories.Monsters;
 
 namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
@@ -14,16 +15,45 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             PercentToRage = 15;
             this.HP = (int)HeroHP.Gladiator;
             this.HPMax = HP;
-            this.Damage = (int)HeroDamage.Gladiator;
+            Damage = (int)HeroDamage.Gladiator;
         }
 
-        public void ActivateRage() 
+        public void GladiatorAttack(Monster monster)
+        {
+            while (true)
+            {
+                Console.WriteLine("Želite li napasti iz bijesa za 15 HP-a \n" +
+                "i time napraviti dupli damage.(da/ne)?");
+                var answer = Console.ReadLine()!;
+                if (answer.ToLower() == "da")
+                {
+                    monster.HP -= ActivateRage();
+                    GetExperience(monster.XP);
+                    break;
+                }
+                else if (answer.ToLower() == "ne")
+                {
+                    monster.HP -= Damage;
+                    GetExperience(monster.XP);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Pogrešan unos.");
+                    continue;
+                }
+            }      
+        }
+
+        public int ActivateRage() 
         {
             // we ask the player before if he wants to fight with rage
             // through interface
             RageMode = true;
-            this.Damage *= 2; //double damage
-            this.HP -= this.HP * (PercentToRage/100); // he then spends 15% of his hp
+            HP -= 15;
+            int d = Damage;
+            return d *= 2; //double damage
+            // he then spends 15% of his hp
         }
     }
 }
