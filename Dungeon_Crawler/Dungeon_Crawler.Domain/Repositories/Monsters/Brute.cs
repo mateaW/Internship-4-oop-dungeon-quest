@@ -4,12 +4,24 @@
     {
         public Brute()
         {
+            Random random = new();
             this.Type = "Goblin";
-            this.HP = 150;
-            this.HPMax = 150;
-            this.XP = 100;
-            this.Damage = 100;
+            this.HP = random.Next(1, 21);
+            this.XP = random.Next(1, 11);
+            this.Damage = random.Next(1, 16);
         }
-
+        public bool TakingPercentageOfLife()
+        {
+            Random random = new ();
+            double possibility = random.NextDouble();
+            if(possibility >= 50)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler.Domain.Repositories.Heroes
+﻿using Dungeon_Crawler.Data.Enums;
+
+namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
     public class Gladiator : Hero
     {
@@ -10,16 +12,18 @@
             this.Type = "Gladiator";
             RageMode = false;
             PercentToRage = 15;
-            this.HP = 600;
-            this.HPMax = 600;
-            this.Damage = 100;
+            this.HP = (int)HeroHP.Gladiator;
+            this.HPMax = HP;
+            this.Damage = (int)HeroDamage.Gladiator;
         }
 
-        public void ActivateRage()
+        public void ActivateRage() 
         {
+            // we ask the player before if he wants to fight with rage
+            // through interface
             RageMode = true;
-            this.Damage *= 2;
-            this.HP -= this.HP * (PercentToRage/100);
+            this.Damage *= 2; //double damage
+            this.HP -= this.HP * (PercentToRage/100); // he then spends 15% of his hp
         }
     }
 }

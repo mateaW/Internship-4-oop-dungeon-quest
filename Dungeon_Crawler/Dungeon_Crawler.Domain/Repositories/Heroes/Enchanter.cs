@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler.Domain.Repositories.Heroes
+﻿using Dungeon_Crawler.Data.Enums;
+
+namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
     public class Enchanter : Hero
     {
@@ -10,29 +12,76 @@
 
         public Enchanter(string Name) : base(Name)
         {
-            Mana = 200;
-            MaxMana = 200;
+            Mana = 15;
+            MaxMana = 15;
             this.Type = "Enchanter";
-            this.HP = 400;
-            this.HPMax = 400;
-            this.Damage = 200;
-
+            this.HP = (int)HeroHP.Enchanter;
+            this.HPMax = HP;
+            this.Damage = (int)HeroDamage.Enchanter;
+            CanRevive = true; // he can only revive once
         }
-        public void Heal()
+
+        public void UseManaForAttack()
         {
-            if (Mana >= 50)
+            if (Mana > 0)
             {
-                this.HP += 250;
-                Mana -= 50;
-                this.PrintInfo();
+                Console.WriteLine($"{Name} koristi magičnu moć za napad.");
+                Mana--;
+            }
+            else
+            {
+                Console.WriteLine($"{Name} nema dovoljno mane za napad. Mana će se obnoviti.");
+                RenewMana();
+            }
+        }
+        public void ExchangeManaForHP(int manaToExchange)
+        {
+            if (Mana >= manaToExchange)
+            {
+                this.HP += manaToExchange;
+                Console.WriteLine($"{Name} je iskoristio {manaToExchange} mane da bi dobio dodatne hp.");
+                Mana -= manaToExchange;
+                this.PrintHeroInfo();
+            }
+            else
+            {
+                Console.WriteLine("Nemate dovoljno mane za obnavljanje hp-a.");
+            }
+        }
+
+        public void RenewMana()
+        {
+            if (Mana <= 0) 
+            {
+                Mana = MaxMana;
             }
         }
 
         public void Revive()
         {
-            HP = HPMax;
-            Mana = MaxMana;
+            if (CanRevive)
+            {
+                HP = HPMax;
+                Mana = MaxMana;
+            }
+            else
+            {
+                Console.WriteLine("Već ste jednom iskoristili mogućnost oživljavanja.");
+            }
             CanRevive = false;
+        }
+
+        public override void LevelUp()
+        {
+            base.LevelUp();
+            Mana++;
+        }
+
+        public override void PrintHeroInfo()
+        {
+            base.PrintHeroInfo();
+            Console.WriteLine($"MANA: {Mana} / {MaxMana}\n" +
+                $"MOGUĆNOST OŽIVLJAVANJA: {CanRevive}");
         }
     }
 }

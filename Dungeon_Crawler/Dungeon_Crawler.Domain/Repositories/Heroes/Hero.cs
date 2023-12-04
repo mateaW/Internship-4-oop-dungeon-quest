@@ -2,7 +2,7 @@
 
 namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
-    public abstract class Hero
+    public class Hero
     {
         public string Name { get; set; }
 
@@ -22,6 +22,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             Type = "";
             XP = 0;
             XPMax = 100;
+            HPMax = HP;
             Level = 1;
         }
 
@@ -36,33 +37,33 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             }
         }
 
-        public void LevelUp()
+        public virtual void LevelUp()
         {
             Level++;
             Console.WriteLine("POSTIGLI STE NOVI LEVEL. \n" +
                 $"NOVI LEVEL JE: {Level}");
-            HP += 15;
-            Damage += 5;
-            Console.WriteLine($"HP: {HP}\n" +
-                $"XP: {XP}" +
+            // same for every type of hero
+            HP += 15; 
+            Damage += 5; 
+            Console.WriteLine($"HP: {HP} / {HPMax}\n" +
+                $"XP: {XP} / {XPMax}\n" +
                 $"DAMAGE: {Damage}");
-
         }
 
-        public void AttackMonster(Monster monster)
+        public virtual void AttackMonster(Monster monster)
         {
 
         }
 
-        public void PrintInfo()
+        public virtual void PrintHeroInfo()
         {
             Console.WriteLine($"HERO: {Name}\n" +
+                $"TYPE: {Type}\n" +
                 $"LEVEL: {Level}\n" +
-                $"HP: {HP} \n" +
-                $"XP: {XP} \n" +
-                $"DAMAGE: {Damage} \n");
+                $"HP: {HP}/{HPMax} \n" +
+                $"XP: {XP}/{XPMax} \n" +
+                $"DAMAGE: {Damage}");
         }
-
     }
 }
 

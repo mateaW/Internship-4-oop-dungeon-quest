@@ -4,11 +4,11 @@
     {
         public Goblin()
         {
+            Random random = new();
             this.Type = "Goblin";
-            this.HP = 150;
-            this.HPMax = 150;
-            this.XP = 100;
-            this.Damage = 100;
+            this.HP = random.Next(1,11);
+            this.XP = random.Next(1,11);
+            this.Damage = random.Next(1, 11);
         }
     }
 }

@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Crawler.Domain.Repositories.Enums
+namespace Dungeon_Crawler.Data.Enums
 {
-    internal class MonsterEnums
+    public enum MonsterType
     {
+        Goblin,
+        Brute,
+        Witch
     }
 }
