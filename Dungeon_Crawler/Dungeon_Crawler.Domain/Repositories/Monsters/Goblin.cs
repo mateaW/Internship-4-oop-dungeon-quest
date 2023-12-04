@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Domain.Repositories.Heroes;
+using System.Threading;
 
 namespace Dungeon_Crawler.Domain.Repositories.Monsters
 {
@@ -15,7 +16,12 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
 
         public void GoblinAttack(Hero hero)
         {
-            
+            Console.WriteLine($"Goblin napada. Oduzima vam {Damage} hp-a.");
+            hero.HP -= this.Damage;
+            Console.WriteLine();
+            hero.PrintHeroInfo();
+            Console.WriteLine();
+            PrintMonsterInfo();
         }
     }
 }

@@ -32,14 +32,19 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
             }
         }
 
-        public override void Attack(Hero hero)
+        public void WitchAttack(Hero hero)
         {
-            base.Attack(hero);
             if (CurseProbability())
             {
                 Random random = new();
                 hero.HP = random.Next(1, 6);
-                // add that health also changes to monsters
+                Console.WriteLine($"Witch je iskoristila specijalnu moć đumbus." +
+                    $"HP vam je postavljen na nasumičnu vrijednost: {hero.HP}");
+            }
+            else
+            {
+                Console.WriteLine($"Witch napada. Oduzeto vam je {Damage} hp-a.");
+                hero.HP -= Damage;
             }
         }
 

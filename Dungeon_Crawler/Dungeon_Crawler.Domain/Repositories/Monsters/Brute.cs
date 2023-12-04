@@ -26,17 +26,23 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
             }
         }
 
-        public override void Attack(Hero hero)
+        public void BruteAttack(Hero hero)
         {
-            base.Attack(hero);
+            Console.WriteLine($"Brute napada.");
             if (TakingPercentageOfLife())
             {
-                // it is possible to take percent of life
+                Console.WriteLine("Oduzeo vam je 50% života.");
+                hero.HP /= 2; 
             }
             else
             {
-                // normal attack
+                Console.WriteLine($"Oduzeo vam je {Damage} hp-a.");
+                hero.HP -= this.Damage;
             }
+            Console.WriteLine();
+            hero.PrintHeroInfo();
+            Console.WriteLine();
+            PrintMonsterInfo();
         }
     }
 }

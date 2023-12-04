@@ -1,36 +1,51 @@
 ﻿using Dungeon_Crawler.Data.Enums;
 using Dungeon_Crawler.Domain.Repositories.Heroes;
 using Dungeon_Crawler.Domain.Repositories.Monsters;
+using System.Net.WebSockets;
 
-bool game = true;
+MainMenu();
 
-while (game)
+static void MainMenu()
+{
+    bool game = true;
+    while (game)
+    {
+        Console.Clear();
+        StartingText();
+
+        var _ = int.TryParse(Console.ReadLine(), out int choice);
+
+        if (choice == 1)
+        {
+            StartGame();
+        }
+        else if (choice == 2)
+        {
+            game = Exit();
+        }
+        else
+        {
+            Console.WriteLine("Pogrešan unos. Pokušajte ponovo.");
+            Thread.Sleep(1000);
+            continue;
+
+        }
+    }
+}
+static bool Exit()
 {
     Console.Clear();
+    Console.WriteLine("Izlaz iz igre ...");
+    Thread.Sleep(1000);
+    return false;
+}
+
+static void StartingText()
+{
     Console.WriteLine("---- DOBRODOŠLI U DUNGEON CRAWLER ----");
     Console.WriteLine();
     Console.WriteLine("1 - IGRAJ\n" +
         "2 - IZAĐI IZ IGRE\n");
-
-    var _ = int.TryParse(Console.ReadLine(), out int choice);
-
-    if (choice == 1)
-    {
-        StartGame();
-    }
-    else if (choice == 2)
-    {
-        Console.Clear();
-        Console.WriteLine("Izlaz iz igre ...");
-        Thread.Sleep(1000);
-        game = false;
-    }
-    else
-    {
-        Console.WriteLine("Pogrešan unos. Pokušajte ponovo.");
-        Thread.Sleep(1000);
-        continue;
-    }
 }
 
 static void StartGame()
@@ -156,84 +171,183 @@ static int ChooseHero()
 static void PlayWithGladiator(Gladiator gladiator)
 {
     Monster monster = new();
-    List<MonsterType> monsters = monster.MonsterGenerator(10); 
-
+    List<MonsterType> monsters = monster.MonsterGenerator(10);
+    int wins = 0;
     for (int i = 1; i < monsters.Count; i++) 
     {
         Console.Clear();
+        Console.WriteLine($"Za sada imate {wins} pobjeda.");
         Console.WriteLine($"{i}. protivnik je: {monsters[i]}.\n");
-        
+
         if (monsters[i].ToString() == "Goblin")
         {
             Goblin monsterToPlay = new();
             while (true)
             {
-                int gladiatorAction = ChooseAction();
-                int monsterAction = MonsterAction();
-                string winner = ChooseWinner(gladiatorAction, monsterAction);
+                int gladiatorAction = ChooseAction(); // player chooses action
+                int monsterAction = MonsterAction(); // monster gives random action
+
+                string winner = ChooseWinner(gladiatorAction, monsterAction); // chosing the winner
+
                 Console.WriteLine(winner);
+
                 if (winner == "Nitko nije pobijedio.")
                 {
                     Console.WriteLine("Igra se ponovo ista runda.\n");
-                    continue;
+                    continue; // everyone choses action again 
                 }
+
                 else if (winner == "Pobijedili ste.")
                 {
-                    gladiator.GladiatorAttack(monsterToPlay);
-                    Console.WriteLine();
-                    gladiator.PrintHeroInfo();
-                    Console.WriteLine();
-                    monsterToPlay.PrintMonsterInfo();
-                    break;
+                    gladiator.GladiatorAttack(monsterToPlay); // player won and attacks the monster
                 }
+
                 else if (winner == "Čudovište je pobijedilo.")
                 {
-                    monsterToPlay.GoblinAttack(gladiator); //
-                    Console.WriteLine();
-                    gladiator.PrintHeroInfo();
-                    Console.WriteLine();
-                    monsterToPlay.PrintMonsterInfo();
-                    break;
+                    monsterToPlay.GoblinAttack(gladiator); // monster won and attacks the player
                 }
+
+                // checking if the player lost or he defeated the enemy, if not the round continues
                 if (gladiator.HP <= 0)
                 {
-                    Console.WriteLine("Izgubili ste.");
-                    AfterLosing();
-
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing(); // player lost and he is asked if he wants to play again or quit
                 }
                 else if (monster.HP <= 0)
                 {
+                    wins += 1;
+                    // monster is defeated we continue to the next one
                     Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    break;          
+                }
+                else
+                {
+                    // no one lost the round goes again
+                    continue;
+                }
+            }
+        }
+        else if(monsters[i].ToString() == "Brute")
+        {
+            Brute monsterToPlay = new();
+            while (true)
+            {
+                int gladiatorAction = ChooseAction(); // player chooses action
+                int monsterAction = MonsterAction(); // monster gives random action
+
+                string winner = ChooseWinner(gladiatorAction, monsterAction); // chosing the winner
+
+                Console.WriteLine(winner);
+
+                if (winner == "Nitko nije pobijedio.")
+                {
+                    Console.WriteLine("Igra se ponovo ista runda.\n");
+                    continue; // everyone choses action again 
+                }
+
+                else if (winner == "Pobijedili ste.")
+                {
+                    gladiator.GladiatorAttack(monsterToPlay); // player won and attacks the monster
+                }
+
+                else if (winner == "Čudovište je pobijedilo.")
+                {
+                    monsterToPlay.BruteAttack(gladiator); // monster won and attacks the player
+                }
+
+                // checking if the player lost or he defeated the enemy, if not the round continues
+                if (gladiator.HP <= 0)
+                {
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing(); // player lost and he is asked if he wants to play again or quit
+                }
+                else if (monster.HP <= 0)
+                {
+                    wins += 1;
+                    // monster is defeated we continue to the next one
+                    Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
                     Console.ReadKey();
                     break;
                 }
                 else
                 {
+                    // no one lost the round goes again
                     continue;
                 }
             }
-
-            
-        }
-        else if(monsters[i].ToString() == "Brute")
-        {
-            Brute monsterToPlay = new();
         }
         else
         {
             Witch monsterToPlay = new();
+            while (true)
+            {
+                int gladiatorAction = ChooseAction(); // player chooses action
+                int monsterAction = MonsterAction(); // monster gives random action
+
+                string winner = ChooseWinner(gladiatorAction, monsterAction); // chosing the winner
+
+                Console.WriteLine(winner);
+
+                if (winner == "Nitko nije pobijedio.")
+                {
+                    Console.WriteLine("Igra se ponovo ista runda.\n");
+                    continue; // everyone choses action again 
+                }
+
+                else if (winner == "Pobijedili ste.")
+                {
+                    gladiator.GladiatorAttack(monsterToPlay); // player won and attacks the monster
+                }
+
+                else if (winner == "Čudovište je pobijedilo.")
+                {
+                    monsterToPlay.WitchAttack(gladiator); // monster won and attacks the player
+                }
+
+                // checking if the player lost or he defeated the enemy, if not the round continues
+                if (gladiator.HP <= 0)
+                {
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing(); // player lost and he is asked if he wants to play again or quit
+                }
+                else if (monsterToPlay.HP <= 0)
+                {
+                    wins += 1;
+                    // monster is defeated we continue to the next one
+                    Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    break;
+                }
+                else
+                {
+                    // no one lost the round goes again
+                    continue;
+                }
+            }
         }
     }
-
+    Console.WriteLine("Čestitamo. Pobijedili ste svih 10 čudovišta.\n");
+    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+    Console.ReadKey();
+    MainMenu();
 }
 
 static void AfterLosing()
 {
-    while (true)
+    bool game = true;
+    while (game)
     {
-        Console.WriteLine("---- IZGUBILI STE U IGRI ----");
-        Console.WriteLine("1 - IGRAJ PONOVO\n" +
-            "2 - IZAĐI IZ IGRE\n");
+        ContinueText();
 
         var _ = int.TryParse(Console.ReadLine(), out int choice);
 
@@ -243,10 +357,7 @@ static void AfterLosing()
         }
         else if (choice == 2)
         {
-            Console.Clear();
-            Console.WriteLine("Izlaz iz igre ...");
-            Thread.Sleep(1000);
-            break;
+            Exit();
         }
         else
         {
@@ -255,7 +366,13 @@ static void AfterLosing()
             continue;
         }
     }
-
+}
+static void ContinueText()
+{
+    Console.Clear();
+    Console.WriteLine("---- IZGUBILI STE U IGRI ----\n");
+    Console.WriteLine("1 - IGRAJ PONOVO\n" +
+        "2 - IZAĐI IZ IGRE\n");
 }
 
 static int ChooseAction()
@@ -348,6 +465,7 @@ static string  ChooseWinner(int heroAction, int monsterAction)
     }
     return winner;
 }
+
 static void PlayWithEnchanter(Enchanter enchanter)
 {
 

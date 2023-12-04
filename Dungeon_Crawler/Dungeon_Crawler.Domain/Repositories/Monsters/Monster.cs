@@ -16,11 +16,6 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
             // different values for HP,XP,Damage for every monster
         }
 
-        public virtual void Attack(Hero hero)
-        {
-            // there will be different logic for attack for every monster
-        }
-
         public virtual void PrintMonsterInfo()
         {
             Console.WriteLine($"MONSTER: {Type}\n" +

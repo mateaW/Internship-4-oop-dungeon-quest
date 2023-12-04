@@ -42,7 +42,11 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                     Console.WriteLine("Pogrešan unos.");
                     continue;
                 }
-            }      
+            }
+            Console.WriteLine();
+            PrintHeroInfo();
+            Console.WriteLine();
+            monster.PrintMonsterInfo();
         }
 
         public int ActivateRage() 
