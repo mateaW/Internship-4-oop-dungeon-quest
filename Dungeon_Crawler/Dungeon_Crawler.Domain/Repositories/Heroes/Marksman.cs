@@ -29,10 +29,6 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 monster.HP -= d;
                 GetExperience(monster.XP);
             }
-            else if(PossibilityOfStunChance())
-            {
-                Console.WriteLine("Napadate uz pomoć svojstva Stun Chance što znači da čudovište automatski gubi.");
-            }
             else
             {
                 Console.WriteLine("Niste ostvarili vjerojatnost za dodatne mogućnosti pa napadate normalno.");

@@ -88,13 +88,12 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
 
         public void Revive()
         {
-            if (CanRevive)
-            {
-                Console.WriteLine("Iako ste izgubili protiv čudovišta, Enchanter ima mogućnost jednom oživjeti.\n" +
-                    "Možete nastaviti igru.");
-                HP = HPMax;
-                Mana = MaxMana;
-            }
+
+            Console.WriteLine("Iako ste izgubili protiv čudovišta, Enchanter ima mogućnost jednom oživjeti.\n" +
+                "Možete nastaviti igru.");
+            HP = HPMax;
+            Mana = MaxMana;
+            
             CanRevive = false;
         }
 
