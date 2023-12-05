@@ -19,26 +19,27 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             this.HP = (int)HeroHP.Enchanter;
             this.HPMax = HP;
             this.Damage = (int)HeroDamage.Enchanter;
-            CanRevive = true; // he can only revive once
+            CanRevive = true; 
         }
 
         public void EnchanterAttack(Monster monster)
         {
-
             while(true)
             {
-                Console.WriteLine("Upišite m ako želite iskoristitit manu za obnovu života," +
-                        "a upišite p ako zelite napasti.\n");
+                Console.WriteLine("Upišite 'OBNOVA' ako želite iskoristitit manu za obnovu života," +
+                        "a upišite 'NAPAD' ako želite napasti.\n");
                 var input = Console.ReadLine()!;
-                if(input.ToLower() == "m")
+                if(input.ToLower() == "obnova")
                 {
                     ExchangeManaForHP(Mana);
                     break;
                 }
-                else if(input.ToLower() == "p")
+                else if(input.ToLower() == "napad")
                 {
                     if (Mana > 0)
                     {
+                        Console.WriteLine($"Napali ste čudovište i smanjili mu HP za {Damage},\n" +
+                            $"dobili ste {monster.XP} XP-a. Mana se smanjila za 1.");
                         monster.HP -= Damage;
                         GetExperience(monster.XP);
                         Mana--;
@@ -57,10 +58,9 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 }
             }
             Console.WriteLine();
-            PrintHeroInfo();
+            this.PrintHeroInfo();
             Console.WriteLine();
             monster.PrintMonsterInfo();
-
         }
 
         public void ExchangeManaForHP(int manaToExchange)
@@ -68,13 +68,13 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             if (Mana >= manaToExchange)
             {
                 this.HP += manaToExchange;
-                Console.WriteLine($"{Name} je iskoristio {manaToExchange} mane da bi dobio dodatne hp.");
                 Mana -= manaToExchange;
-                this.PrintHeroInfo();
+                Console.WriteLine($"Iskoristili ste {manaToExchange} mane da bi dobili dodatne HP.\n" +
+                    $"Sada imate {this.HP} HP-a.");
             }
             else
             {
-                Console.WriteLine("Nemate dovoljno mane za obnavljanje hp-a.");
+                Console.WriteLine("Nemate dovoljno mane za obnavljanje HP-a.");
             }
         }
 
@@ -90,12 +90,10 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
         {
             if (CanRevive)
             {
+                Console.WriteLine("Iako ste izgubili protiv čudovišta, Enchanter ima mogućnost jednom oživjeti.\n" +
+                    "Možete nastaviti igru.");
                 HP = HPMax;
                 Mana = MaxMana;
-            }
-            else
-            {
-                Console.WriteLine("Već ste jednom iskoristili mogućnost oživljavanja.");
             }
             CanRevive = false;
         }
