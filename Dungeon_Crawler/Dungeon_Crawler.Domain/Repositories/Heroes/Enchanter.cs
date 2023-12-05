@@ -24,16 +24,43 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
 
         public void EnchanterAttack(Monster monster)
         {
-            if (Mana > 0)
+
+            while(true)
             {
-                monster.HP -= Damage;
-                GetExperience(monster.XP);
-                Mana--;
+                Console.WriteLine("Upišite m ako želite iskoristitit manu za obnovu života," +
+                        "a upišite p ako zelite napasti.\n");
+                var input = Console.ReadLine()!;
+                if(input.ToLower() == "m")
+                {
+                    ExchangeManaForHP(Mana);
+                    break;
+                }
+                else if(input.ToLower() == "p")
+                {
+                    if (Mana > 0)
+                    {
+                        monster.HP -= Damage;
+                        GetExperience(monster.XP);
+                        Mana--;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nemate mane, ne možete napasti, ali ona će se obnoviti.");
+                        RenewMana();
+                    }
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Pogrešan unos.");
+                    continue;
+                }
             }
-            else
-            {
-                RenewMana();
-            }
+            Console.WriteLine();
+            PrintHeroInfo();
+            Console.WriteLine();
+            monster.PrintMonsterInfo();
+
         }
 
         public void ExchangeManaForHP(int manaToExchange)

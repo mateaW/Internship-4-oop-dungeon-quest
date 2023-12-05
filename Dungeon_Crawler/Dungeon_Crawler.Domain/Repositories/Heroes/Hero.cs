@@ -19,7 +19,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
         public Hero(string name)
         {
             Name = name;
-            Type = "";
+            Type = "vlastiti heroj";
             XP = 0;
             XPMax = 100;
             HPMax = HP;
@@ -27,6 +27,9 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
         }
         public void HeroAttack(Monster monster)
         {
+            Console.WriteLine("Napali ste čudovište i smanjili mu HP za " +
+                $"{Damage} bodova.\n" +
+                $"Dobili ste {monster.XP} XP-a.");
             monster.HP -= Damage;
             GetExperience(monster.XP);
         }
@@ -44,18 +47,16 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
         public virtual void LevelUp()
         {
             Level++;
-            Console.WriteLine("POSTIGLI STE NOVI LEVEL. \n" +
-                $"NOVI LEVEL JE: {Level}");
-            // same for every type of hero
+            Console.WriteLine("Postigli ste novi level. \n" +
+                $"Novi level je: {Level}\n");
             HP += 15; 
-            Damage += 5; 
-            Console.WriteLine($"HP: {HP} / {HPMax}\n" +
-                $"XP: {XP} / {XPMax}\n" +
-                $"DAMAGE: {Damage}");
+            Damage += 5;
+            PrintHeroInfo();
         }
 
         public virtual void PrintHeroInfo()
         {
+            Console.WriteLine("Trenutni podaci o vašem heroju.");
             Console.WriteLine($"HERO: {Name}\n" +
                 $"TYPE: {Type}\n" +
                 $"LEVEL: {Level}\n" +
