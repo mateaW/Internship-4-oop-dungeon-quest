@@ -32,6 +32,10 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 $"Dobili ste {monster.XP} XP-a.");
             monster.HP -= Damage;
             GetExperience(monster.XP);
+            Console.WriteLine();
+            PrintHeroInfo();
+            Console.WriteLine();
+            monster.PrintMonsterInfo();
         }
         public void GetExperience(int xpGained)
         {

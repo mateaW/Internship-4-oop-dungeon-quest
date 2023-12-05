@@ -52,7 +52,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 }
             }
             Console.WriteLine();
-            PrintHeroInfo();
+            this.PrintHeroInfo();
             Console.WriteLine();
             monster.PrintMonsterInfo();
         }

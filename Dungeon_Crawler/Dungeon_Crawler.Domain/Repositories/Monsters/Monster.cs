@@ -13,7 +13,6 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
         public Monster()
         {
             Type = "";
-            // different values for HP,XP,Damage for every monster
         }
 
         public virtual void PrintMonsterInfo()
@@ -24,11 +23,8 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
                 $"DAMAGE: {Damage} \n");
         }
 
-        
         public List<MonsterType> MonsterGenerator(int numberOfMonsters)
         {
-            // generates how much we want monsters and puts them in a list
-
             List<MonsterType> monsters = new List<MonsterType>();
             Random random = new();
 
@@ -37,15 +33,15 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
                 double randomValue = random.NextDouble();
                 MonsterType monsterType;
 
-                if (randomValue < 0.6)  // 60% chance for Goblin
+                if (randomValue < 0.6) 
                 {
                     monsterType = MonsterType.Goblin;
                 }
-                else if (randomValue < 0.9)  // 30% chance for Brute
+                else if (randomValue < 0.9)  
                 {
                     monsterType = MonsterType.Brute;
                 }
-                else  // 10% chance for Witch
+                else 
                 {
                     monsterType = MonsterType.Witch;
                 }

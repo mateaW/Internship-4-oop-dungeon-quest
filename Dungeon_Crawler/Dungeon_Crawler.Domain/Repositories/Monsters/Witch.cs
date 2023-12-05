@@ -15,10 +15,12 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
 
         public void MakeTwoNewMonsters()
         {
+            Console.WriteLine("Porazili ste čudovište Witch. Što znači da se morate boriti\n " +
+                "protiv sljedeća dva novo generirana čudovišta.");
             MonsterGenerator(2);
         }
 
-        public bool CurseProbability()
+        static bool CurseProbability()
         {
             Random random = new();
             double curseProbability = random.NextDouble();
@@ -39,13 +41,17 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
                 Random random = new();
                 hero.HP = random.Next(1, 6);
                 Console.WriteLine($"Witch je iskoristila specijalnu moć đumbus." +
-                    $"HP vam je postavljen na nasumičnu vrijednost: {hero.HP}");
+                    $"HP vam je postavljen na nasumičnu vrijednost od: {hero.HP}");
             }
             else
             {
                 Console.WriteLine($"Witch napada. Oduzeto vam je {Damage} hp-a.");
                 hero.HP -= Damage;
             }
+            Console.WriteLine();
+            hero.PrintHeroInfo();
+            Console.WriteLine();
+            PrintMonsterInfo();
         }
 
     }

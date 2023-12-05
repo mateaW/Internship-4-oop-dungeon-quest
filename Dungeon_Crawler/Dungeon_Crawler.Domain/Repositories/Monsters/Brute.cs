@@ -12,7 +12,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
             this.XP = random.Next(1, 11);
             this.Damage = random.Next(1, 16);
         }
-        public bool TakingPercentageOfLife()
+        static bool TakingPercentageOfLife()
         {
             Random random = new ();
             double possibility = random.NextDouble();
@@ -36,7 +36,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
             }
             else
             {
-                Console.WriteLine($"Oduzeo vam je {Damage} hp-a.");
+                Console.WriteLine($"Oduzeo vam je {Damage} HP-a.");
                 hero.HP -= this.Damage;
             }
             Console.WriteLine();

@@ -16,7 +16,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
 
         public void GoblinAttack(Hero hero)
         {
-            Console.WriteLine($"Goblin napada. Oduzima vam {Damage} hp-a.");
+            Console.WriteLine($"Goblin napada. Oduzima vam {Damage} HP-a.");
             hero.HP -= this.Damage;
             Console.WriteLine();
             hero.PrintHeroInfo();

@@ -43,6 +43,10 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 monster.HP -= Damage;
                 GetExperience(monster.XP);
             }
+            Console.WriteLine();
+            this.PrintHeroInfo();
+            Console.WriteLine();
+            monster.PrintMonsterInfo();
         }
         public bool PossibilityOfCriticalChance()
         {
