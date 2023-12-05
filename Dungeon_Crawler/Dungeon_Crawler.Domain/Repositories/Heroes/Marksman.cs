@@ -1,4 +1,6 @@
 ﻿using Dungeon_Crawler.Data.Enums;
+using Dungeon_Crawler.Domain.Repositories.Monsters;
+using System.Threading;
 
 namespace Dungeon_Crawler.Domain.Repositories.Heroes
 {
@@ -13,17 +15,41 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             this.HP = (int)HeroHP.Marksman;
             this.HPMax = HP;
             this.Type = "Marksman";
-            // at the beggining possibilities of these two s 10%
             this.CriticChance = 0.1;
             this.StunChance = 0.1;
         }
 
+        public void MarksmanAttack(Monster monster)
+        {
+            if(PossibilityOfCriticalChance())
+            {
+                int d = HandleCriticalHit();
+                Console.WriteLine("Napadate uz pomoć svojstva Critical Hit.");
+                Console.WriteLine($"Radite dupli damage te ste oštetili čudovište za {d} HP-a.");
+                Console.WriteLine($"Time ste dobili {monster.XP} XP-a.");
+                monster.HP -= d;
+                GetExperience(monster.XP);
+            }
+            else if(PossibilityOfStunChance())
+            {
+                Console.WriteLine("Napadate uz pomoć svojstva Stun Chance što znači da čudovište automatski gubi.");
+            }
+            else
+            {
+                Console.WriteLine("Niste ostvarili vjerojatnost za dodatne mogućnosti pa napadate normalno.");
+                Console.WriteLine("Napali ste čudovište i smanjili mu HP za " +
+                     $"{Damage} bodova.\n" +
+                     $"Dobili ste {monster.XP} XP-a.");
+                monster.HP -= Damage;
+                GetExperience(monster.XP);
+            }
+        }
         public bool PossibilityOfCriticalChance()
         {
             Random random = new();
             if(CriticChance >= random.NextDouble()) 
             {
-                return true; // if possibility of critical chance is greater than a random percent player can use it
+                return true; 
             }
             else
             {
@@ -31,9 +57,10 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
             }
         }
 
-        public void HandleCriticalHit()
+        public int HandleCriticalHit()
         {
-            Damage *= 2;
+            int d = Damage * 2;
+            return d;
         }
 
         public bool PossibilityOfStunChance()
@@ -48,15 +75,10 @@ namespace Dungeon_Crawler.Domain.Repositories.Heroes
                 return false;
             }
         }
-        public void HandleStunHit()
-        {
-            // cudoviste gubi rundu
-        }
 
         public override void LevelUp()
         {
             base.LevelUp();
-            // possibilities grow with level up for 10%
             CriticChance += 0.1;
             StunChance += 0.1;
         }
