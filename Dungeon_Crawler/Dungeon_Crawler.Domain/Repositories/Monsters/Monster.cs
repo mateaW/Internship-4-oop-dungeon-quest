@@ -25,7 +25,7 @@ namespace Dungeon_Crawler.Domain.Repositories.Monsters
 
         public List<MonsterType> MonsterGenerator(int numberOfMonsters)
         {
-            List<MonsterType> monsters = new List<MonsterType>();
+            List<MonsterType> monsters = new();
             Random random = new();
 
             for(int i = 0; i < numberOfMonsters; i++)

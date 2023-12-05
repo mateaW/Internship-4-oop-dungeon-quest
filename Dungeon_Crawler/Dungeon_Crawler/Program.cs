@@ -510,7 +510,167 @@ static Hero MakeNewHero()
 
 static void PlayWithNewHero(Hero hero)
 {
+    Monster monster = new();
+    List<MonsterType> monsters = monster.MonsterGenerator(10);
+    int wins = 0;
+    for (int i = 1; i < monsters.Count; i++) 
+    {
+        Console.Clear();
+        Console.WriteLine($"Za sada imate {wins} pobjeda.");
+        Console.WriteLine($"{i}. protivnik je: {monsters[i]}.\n");
 
+        if (monsters[i].ToString() == "Goblin")
+        {
+            Goblin monsterToPlay = new();
+            while (true)
+            {
+                int heroAction = ChooseAction(); 
+                int monsterAction = MonsterAction(); 
+
+                string winner = ChooseWinner(heroAction, monsterAction); 
+
+                Console.WriteLine(winner);
+
+                if (winner == "Nitko nije pobijedio.")
+                {
+                    Console.WriteLine("Igra se ponovo ista runda.\n");
+                    continue; 
+                }
+
+                else if (winner == "Pobijedili ste.")
+                {
+                    hero.HeroAttack(monsterToPlay); 
+                }
+
+                else if (winner == "Čudovište je pobijedilo.")
+                {
+                    monsterToPlay.GoblinAttack(hero); 
+                }
+
+                if (hero.HP <= 0)
+                {
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing();
+                }
+                else if (monsterToPlay.HP <= 0)
+                {
+                    wins += 1;
+                    Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    break;          
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        else if(monsters[i].ToString() == "Brute")
+        {
+            Brute monsterToPlay = new();
+            while (true)
+            {
+                int heroAction = ChooseAction(); 
+                int monsterAction = MonsterAction(); 
+
+                string winner = ChooseWinner(heroAction, monsterAction); 
+
+                Console.WriteLine(winner);
+
+                if (winner == "Nitko nije pobijedio.")
+                {
+                    Console.WriteLine("Igra se ponovo ista runda.\n");
+                    continue; 
+                }
+
+                else if (winner == "Pobijedili ste.")
+                {
+                    hero.HeroAttack(monsterToPlay);
+                }
+
+                else if (winner == "Čudovište je pobijedilo.")
+                {
+                    monsterToPlay.BruteAttack(hero); 
+                }
+
+                if (hero.HP <= 0)
+                {
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing(); 
+                }
+                else if (monsterToPlay.HP <= 0)
+                {
+                    wins += 1;
+                    Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        else
+        {
+            Witch monsterToPlay = new();
+            while (true)
+            {
+                int heroAction = ChooseAction();
+                int monsterAction = MonsterAction(); 
+
+                string winner = ChooseWinner(heroAction, monsterAction); 
+
+                Console.WriteLine(winner);
+
+                if (winner == "Nitko nije pobijedio.")
+                {
+                    Console.WriteLine("Igra se ponovo ista runda.\n");
+                    continue; 
+                }
+
+                else if (winner == "Pobijedili ste.")
+                {
+                    hero.HeroAttack(monsterToPlay); 
+                }
+
+                else if (winner == "Čudovište je pobijedilo.")
+                {
+                    monsterToPlay.WitchAttack(hero); 
+                }
+                if (hero.HP <= 0)
+                {
+                    Console.WriteLine("Izgubili ste. Nemate više života.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    AfterLosing(); 
+                }
+                else if (monsterToPlay.HP <= 0)
+                {
+                    wins += 1;
+                    Console.WriteLine("PORAZILI STE ČUDOVIŠTE.");
+                    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+                    Console.ReadKey();
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+    }
+    Console.Clear();
+    Console.WriteLine("Čestitamo. Pobijedili ste svih 10 čudovišta.\n");
+    Console.WriteLine("Pritisnite bilo koju tipku za nastavak.");
+    Console.ReadKey();
+    MainMenu();
 }
 
 static string PickHeroName()
@@ -532,4 +692,3 @@ static string PickHeroName()
     }
     return name;
 }
-
